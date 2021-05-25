@@ -1,4 +1,4 @@
-from tkinter import NSEW, W, E
+from tkinter import NSEW, W, E, EW, SW
 import tkinter as tk
 
 import tkmacosx
@@ -18,10 +18,7 @@ class Add_earling_stop(tk.Frame):
         self.parent.protocol("WM_DELETE_WINDOW", self.file_quit)
         self.parent.geometry(self.geometria_baza)
         self.parent.columnconfigure(0, weight=1)
-        self.parent.columnconfigure(1, weight=1)
-        self.parent.columnconfigure(2, weight=1)
-        self.parent.columnconfigure(3, weight=1)
-        self.parent.columnconfigure(4, weight=1)
+        self.parent.columnconfigure(1, weight=10)
         self.parent.rowconfigure(0, weight=1)
         self.parent.rowconfigure(1, weight=1)
         self.parent.rowconfigure(2, weight=1)
@@ -61,6 +58,8 @@ class Add_earling_stop(tk.Frame):
         self.label_verbose = tk.Label(self.parent, text="Verbose")
         self.label_best_weights = tk.Label(self.parent, text="Restore best weights")
 
+        self.frame_checkbox = tk.Frame(self.parent)
+
         self.monitor_var = tk.StringVar()
         self.mid_delta_var = tk.DoubleVar()
         self.patience_var = tk.IntVar()
@@ -70,7 +69,7 @@ class Add_earling_stop(tk.Frame):
         self.monitor_var.set(MONITOR_VAR[0])
 
         self.input_name = tk.Entry(self.parent)
-        self.radio_monitor = [tk.Radiobutton(self.parent, text=MONITOR_VAR[i], variable=self.monitor_var, value=MONITOR_VAR[i])
+        self.radio_monitor = [tk.Radiobutton(self.frame_checkbox, text=MONITOR_VAR[i], variable=self.monitor_var, value=MONITOR_VAR[i])
                           for i in range(len(MONITOR_VAR))]
         self.scale_mid_delta = tk.Scale(self.parent, from_=0., to=0.0009, resolution=0.0001, orient=tk.HORIZONTAL,
                                         variable=self.mid_delta_var)
@@ -82,21 +81,23 @@ class Add_earling_stop(tk.Frame):
 
         self.button_submit = tkmacosx.Button(self.parent, text="Save", command=self.submit)
 
-        self.label_name.grid(row=0, column=0, sticky=W)
-        self.label_monitor.grid(row=1, column=0, sticky=W)
-        self.label_min_delta.grid(row=2, column=0, sticky=W)
-        self.label_patience.grid(row=3, column=0, sticky=W)
-        self.label_verbose.grid(row=4, column=0, sticky=W)
-        self.label_best_weights.grid(row=5, column=0, sticky=W)
+        self.label_name.grid(row=0, column=0, padx=20, sticky=W)
+        self.label_monitor.grid(row=1, column=0, padx=20, sticky=W)
+        self.label_min_delta.grid(row=2, column=0, padx=20, sticky=W)
+        self.label_patience.grid(row=3, column=0, padx=20, sticky=W)
+        self.label_verbose.grid(row=4, column=0, padx=20, sticky=W)
+        self.label_best_weights.grid(row=5, column=0, padx=20, sticky=W)
 
-        self.input_name.grid(row=0, column=1, sticky=W)
+        self.frame_checkbox.grid(row=1, column=1, padx=20, sticky=EW)
+
+        self.input_name.grid(row=0, column=1, padx=20, sticky=EW)
         for i in range(len(self.radio_monitor)):
-            self.radio_monitor[i].grid(row=1, column=1 + i, sticky=W)
-        self.scale_mid_delta.grid(row=2, column=1, sticky=W)
-        self.scale_patience.grid(row=3, column=1, sticky=W)
-        self.scale_verbose.grid(row=4, column=1, sticky=W)
-        self.check_best_weight.grid(row=5, column=1, sticky=W)
-        self.button_submit.grid(row=7, column=1, sticky=E)
+            self.radio_monitor[i].pack(side="left")
+        self.scale_mid_delta.grid(row=2, column=1, padx=20, sticky=EW)
+        self.scale_patience.grid(row=3, column=1, padx=20, sticky=EW)
+        self.scale_verbose.grid(row=4, column=1, padx=20, sticky=EW)
+        self.check_best_weight.grid(row=5, column=1, padx=20, sticky=EW)
+        self.button_submit.grid(row=7, column=1, pady=20, sticky=EW)
 
     def file_quit(self):
         reply = tk.messagebox.askyesno(

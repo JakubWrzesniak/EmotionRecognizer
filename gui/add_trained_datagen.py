@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import NSEW, W, E
+from tkinter import NSEW, W, E, EW, SW
 
 import tkmacosx
 
@@ -16,7 +16,7 @@ class Add_trained_datagen(tk.Frame):
         self.parent.protocol("WM_DELETE_WINDOW", self.file_quit)
         self.parent.geometry(self.geometria_baza)
         self.parent.columnconfigure(0, weight=1)
-        self.parent.columnconfigure(1, weight=1)
+        self.parent.columnconfigure(1, weight=10)
         self.parent.rowconfigure(0, weight=1)
         self.parent.rowconfigure(1, weight=1)
         self.parent.rowconfigure(2, weight=1)
@@ -76,22 +76,22 @@ class Add_trained_datagen(tk.Frame):
 
         self.button_submit = tkmacosx.Button(self.parent, text="Save", command=self.submit)
 
-        self.label_name.grid(row=0, column=0, sticky=W)
-        self.label_roataion.grid(row=1, column=0, sticky=W)
-        self.label_width.grid(row=2, column=0, sticky=W)
-        self.label_height.grid(row=3, column=0, sticky=W)
-        self.label_share.grid(row=4, column=0, sticky=W)
-        self.label_zoom.grid(row=5, column=0, sticky=W)
-        self.label_flip.grid(row=6, column=0, sticky=W)
+        self.label_name.grid(row=0, column=0, padx=20, sticky=SW)
+        self.label_roataion.grid(row=1, column=0, padx=20, sticky=SW)
+        self.label_width.grid(row=2, column=0, padx=20, sticky=SW)
+        self.label_height.grid(row=3, column=0, padx=20, sticky=SW)
+        self.label_share.grid(row=4, column=0, padx=20, sticky=SW)
+        self.label_zoom.grid(row=5, column=0, padx=20, sticky=SW)
+        self.label_flip.grid(row=6, column=0, padx=20, sticky=SW)
 
-        self.input_name.grid(row=0, column=1, sticky=W)
-        self.scale_rotation.grid(row=1, column=1, sticky=W)
-        self.scale_width.grid(row=2, column=1, sticky=W)
-        self.scale_height.grid(row=3, column=1, sticky=W)
-        self.scale_share.grid(row=4, column=1, sticky=W)
-        self.scale_zoom.grid(row=5, column=1, sticky=W)
-        self.check_horizontal.grid(row=6, column=1, sticky=W)
-        self.button_submit.grid(row=7, column=1, padx=20, pady=20, sticky=E)
+        self.input_name.grid(row=0, column=1, padx=20, sticky=EW)
+        self.scale_rotation.grid(row=1, column=1, padx=20, sticky=EW)
+        self.scale_width.grid(row=2, column=1, padx=20, sticky=EW)
+        self.scale_height.grid(row=3, column=1, padx=20, sticky=EW)
+        self.scale_share.grid(row=4, column=1, padx=20, sticky=EW)
+        self.scale_zoom.grid(row=5, column=1, padx=20, sticky=EW)
+        self.check_horizontal.grid(row=6, column=1, padx=20, sticky=EW)
+        self.button_submit.grid(row=7, column=1, padx=20, pady=20, sticky=EW)
 
     def file_quit(self):
         reply = tk.messagebox.askyesno(

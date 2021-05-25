@@ -20,18 +20,16 @@ from tensorflow.python.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from tensorflow.python.keras.utils.vis_utils import plot_model
 
 from config import traind_datagen
-from config.early_stopping import early_stopping
-from config.lr_schedulers import lr_schedulers
 
 mlcompute.set_mlc_device(device_name='gpu')
-
-ARCHITECTURE_PATH = "Model/models/architectures/"
-CONFUSION_MATRIX_PATH = "Model/models/confusion_matrix/"
-EPOCH_HISTORY_PATH = "Model/models/epoch_history/"
-MODELS_PATH = "Model/models/models/"
-PERFORMANCE_DIST_PATH = "Model/models/performance_dist/"
-VALUES_PATH = "Model/models/values/"
-DATA_PATH = "Model/fer2013/fer2013/fer2013.csv"
+__CURRENT_PATH = os.path.dirname(__file__)
+ARCHITECTURE_PATH = os.path.join(__CURRENT_PATH, "models/architectures/")
+CONFUSION_MATRIX_PATH = os.path.join(__CURRENT_PATH, "models/confusion_matrix/")
+EPOCH_HISTORY_PATH = os.path.join(__CURRENT_PATH, "models/epoch_history/")
+MODELS_PATH = os.path.join(__CURRENT_PATH, "models/models/")
+PERFORMANCE_DIST_PATH = os.path.join(__CURRENT_PATH, "models/performance_dist/")
+VALUES_PATH = os.path.join(__CURRENT_PATH, "models/values/")
+DATA_PATH = os.path.join(__CURRENT_PATH, "fer2013/fer2013/fer2013.csv")
 
 
 def create_datagen(pattern):
@@ -345,8 +343,8 @@ class emotion_model:
             df = self.load_data()
             df = self.fileter_data_by_emotions(df)
             img_array, img_labels = self.prepare_data(df)
-            X_train, X_valid, self.__X_test, y_train, y_valid, self.__y_test = self.split_data_for_train_valid_test(img_array,
-                                                                                                                    img_labels)
+            X_train, X_valid, self.__X_test, y_train, y_valid, self.__y_test = self.split_data_for_train_valid_test(
+                img_array, img_labels)
             del df
             del img_array
             del img_labels
@@ -354,11 +352,6 @@ class emotion_model:
             self.train(X_train, y_train, (X_valid, y_valid))
             self.__model.save(MODELS_PATH + self.__model_name + ".h5")
             self.save_values()
-
-    @staticmethod
-    def show_emotion_chart(emotions):
-        sns.countplot(emotions)
-        pyplot.show()
 
     def save_model_architecture(self):
         plot_model(self.__model, show_shapes=True, show_layer_names=True, expand_nested=True,
@@ -370,6 +363,7 @@ class emotion_model:
             ytest_ = np.argmax(self.__y_test, axis=1)
             scikitplot.metrics.plot_confusion_matrix(ytest_, yhat_test, figsize=(7, 7))
             pyplot.savefig(CONFUSION_MATRIX_PATH + self.__model_name + ".png")
+            pyplot.show()
         else:
             raise ValueError("Model is not trained yet, call train first")
 

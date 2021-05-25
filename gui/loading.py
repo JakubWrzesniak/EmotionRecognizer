@@ -1,13 +1,11 @@
 import time
-
 import pyglet
 
 start_time = time.time()
 name = "Creating new model"
 i = 0
+
 def loading(th):
-
-
     animSprite = None
     title = "Creating new model"
     animation = pyglet.image.load_animation('gui/img/loading.gif')
@@ -48,12 +46,7 @@ def loading(th):
         animSprite.draw()
         title().draw()
 
-    @window.event
-    def on_close():
-        pass
-
-
-    def exittt(dt):
+    def exit(dt):
         if th.is_alive():
             pass
         else:
@@ -62,7 +55,7 @@ def loading(th):
             pyglet.app.exit()
 
     th.start()
-    pyglet.clock.schedule_interval(func=exittt, interval=3.)
+    pyglet.clock.schedule_interval(func=exit, interval=3.)
     pyglet.app.run()
 
 

@@ -1,8 +1,8 @@
 
-from gui.interface import SampleApp
+from gui.interface import EmotionRecognizer
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = EmotionRecognizer()
     app.mainloop()
 
 

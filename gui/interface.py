@@ -14,7 +14,7 @@ from gui.show_img import show_img
 emotions = ['anger', 'disgust', 'fear', 'happiness', 'sadness', 'surprise', 'neutral']
 
 
-class SampleApp(tk.Tk):
+class EmotionRecognizer(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -55,7 +55,7 @@ class SampleApp(tk.Tk):
 
 class Main_page(BazoweGui):
 
-    def utworz_dodatki(self):
+    def create_additive(self):
         self.frame = tk.Frame(self, bg="blue")
         self.controller.geometry("600x400+400+150")
         self.title = tk.Label(self, text='Welcom in \nAIOWall', font=self.controller.title_font)
@@ -169,7 +169,7 @@ class Create_model(BazoweGui):
             text = "\n".join([": ".join([name, str(val)]) for name, val in data.items()])
             self.label_lr_scheduler.configure(text=text)
 
-    def utworz_dodatki(self):
+    def create_additive(self):
         frame_main = tk.Frame(self)
         frame_emotions = tk.Frame(frame_main)
         frame_buttons = tk.Frame(frame_main)
@@ -182,7 +182,6 @@ class Create_model(BazoweGui):
 
         button_submit = tk.Button(frame_buttons, text="Create model", command=self.submit, font=self.controller.button_font,
                                   fg='green')
-
 
         frame_trained_datagen = tk.LabelFrame(frame_parameters, highlightbackground="black", text='Trained datagen')
         frame_early_stopping = tk.LabelFrame(frame_parameters, highlightbackground="black", text='Early stopping')
@@ -398,7 +397,7 @@ class Load_model(BazoweGui):
         except AttributeError as e:
             tk.messagebox.showwarning(title='Warning', message="Select model first")
 
-    def utworz_dodatki(self):
+    def create_additive(self):
 
         frame_main = tk.Frame(self)
         frame_edit_buttons = tk.Label(frame_main)
