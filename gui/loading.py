@@ -5,6 +5,7 @@ start_time = time.time()
 name = "Creating new model"
 i = 0
 
+
 def loading(th):
     animSprite = None
     title = "Creating new model"
