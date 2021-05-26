@@ -1,3 +1,4 @@
+import re
 import tkinter as tk
 from copy import copy
 from tkinter import font as tkfont, END, NSEW, EW, W, NW
@@ -117,10 +118,13 @@ class Create_model(Base_Gui):
 
     def submit(self):
         emotions = [i for i in range(len(self.emotion_var)) if self.emotion_var[i].get()]
+        pattern = re.compile(r"[^a-zA-Z0-9_]+")
         if len(emotions) < 2:
             tk.messagebox.showwarning(title="Warnning", message="Please select at least two emotions")
         elif self.input_name.get() == "":
             tk.messagebox.showwarning(title="Warnning", message="Please input name")
+        elif pattern.match(self.input_name.get()):
+            tk.messagebox.showwarning(title="Warnning", message="Name can conatin onlu letters, numbers nad \"_\"")
         elif self.input_name.get() in model_list():
             tk.messagebox.showwarning(title="Warnning", message="Model with this name already exist!")
         elif not self.lr_scheduler_var:
