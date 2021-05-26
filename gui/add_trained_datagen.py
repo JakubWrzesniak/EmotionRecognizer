@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import NSEW, W, E, EW, SW
 
-import tkmacosx
-
 from config.traind_datagen import train_datagen
 
 
@@ -74,7 +72,7 @@ class Add_trained_datagen(tk.Frame):
         self.scale_zoom = tk.Scale(self.parent, from_=0., to=0.15, resolution=0.01, length=200, orient=tk.HORIZONTAL, variable=self.zoom_var)
         self.check_horizontal = tk.Checkbutton(self.parent, variable=self.horizontal_var, onvalue=True, offvalue=False)
 
-        self.button_submit = tkmacosx.Button(self.parent, text="Save", command=self.submit)
+        self.button_submit = tk.Button(self.parent, text="Save", command=self.submit)
 
         self.label_name.grid(row=0, column=0, padx=20, sticky=SW)
         self.label_roataion.grid(row=1, column=0, padx=20, sticky=SW)

@@ -14,14 +14,12 @@ from tensorflow.keras.layers import Dropout, BatchNormalization
 from tensorflow.keras.models import Model
 from tensorflow.keras import optimizers, models
 from keras.utils import np_utils
-from tensorflow.python.compiler.mlcompute import mlcompute
 from tensorflow.python.keras import Input
 from tensorflow.python.keras.callbacks import EarlyStopping, ReduceLROnPlateau
 from tensorflow.python.keras.utils.vis_utils import plot_model
 
 from config import traind_datagen
 
-mlcompute.set_mlc_device(device_name='gpu')
 __CURRENT_PATH = os.path.dirname(__file__)
 ARCHITECTURE_PATH = os.path.join(__CURRENT_PATH, "models/architectures/")
 CONFUSION_MATRIX_PATH = os.path.join(__CURRENT_PATH, "models/confusion_matrix/")

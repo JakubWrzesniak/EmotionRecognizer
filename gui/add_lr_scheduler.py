@@ -1,7 +1,6 @@
 from tkinter import NSEW, E, W, EW, SW
 import tkinter as tk
 
-import tkmacosx
 
 from config.lr_schedulers import lr_schedulers
 

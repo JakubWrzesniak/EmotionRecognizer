@@ -1,7 +1,6 @@
 from tkinter import NSEW, W, E, EW, SW
 import tkinter as tk
 
-import tkmacosx
 
 from config.early_stopping import early_stopping
 
@@ -79,7 +78,7 @@ class Add_earling_stop(tk.Frame):
                                     variable=self.verbose_var)
         self.check_best_weight = tk.Checkbutton(self.parent, variable=self.best_weight_var, onvalue=True, offvalue=False)
 
-        self.button_submit = tkmacosx.Button(self.parent, text="Save", command=self.submit)
+        self.button_submit = tk.Button(self.parent, text="Save", command=self.submit)
 
         self.label_name.grid(row=0, column=0, padx=20, sticky=W)
         self.label_monitor.grid(row=1, column=0, padx=20, sticky=W)
