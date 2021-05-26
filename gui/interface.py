@@ -24,6 +24,7 @@ class EmotionRecognizer(tk.Tk):
         self.button_font = tkfont.Font(family='Comic', size=16)
         self.main_font = tkfont.Font(family='Comic', size=12)
         self.geometry_base = "1000x800+50+50"
+        self.title("Emotion Recognizer")
 
         container = tk.Frame(self)
         container.pack(side="top", fill="both", expand=True)
@@ -231,8 +232,8 @@ class Create_model(Base_Gui):
             tk.Checkbutton(frame_emotions, text=emotions[i], variable=self.emotion_var[i], onvalue=1, offvalue=0)
             for i in range(len(emotions))]
 
-        scale_epoch = tk.Scale(frame_main, from_=1, to=500, orient=tk.HORIZONTAL, variable=self.epoch_var)
-        scale_batch = tk.Scale(frame_main, from_=10, to=50, orient=tk.HORIZONTAL, variable=self.batch_var)
+        scale_epoch = tk.Scale(frame_main, from_=1, to=200, orient=tk.HORIZONTAL, variable=self.epoch_var)
+        scale_batch = tk.Scale(frame_main, from_=10, to=100, orient=tk.HORIZONTAL, variable=self.batch_var)
 
         self.list_train_datagen = tk.Listbox(frame_trained_datagen, font=self.controller.main_font, width=13)
         self.list_early_stopping = tk.Listbox(frame_early_stopping, font=self.controller.main_font, width=13)
@@ -353,7 +354,7 @@ class Load_model(Base_Gui):
             for elem in self.model_list:
                 self.list_models.insert(END, elem)
 
-    def callback(self, event):
+    def load_d(self, event):
 
         def load_emotions():
             data = self.my_models[self.index].model_emotions
@@ -465,4 +466,4 @@ class Load_model(Base_Gui):
         frame_batch_epoch.grid(row=1, column=1, sticky=NW)
         frame_edit_buttons.grid(row=2, column=0)
 
-        self.list_models.bind("<<ListboxSelect>>", self.callback)
+        self.list_models.bind("<<ListboxSelect>>", self.load_d)

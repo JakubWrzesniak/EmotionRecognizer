@@ -26,8 +26,8 @@ def get_color(emotions):
 def emotion_on_img(img, md):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray,
-                                          scaleFactor=1.05,
-                                          minNeighbors=5,
+                                          scaleFactor=1.1,
+                                          minNeighbors=15,
                                           minSize=(48, 48),
                                           flags=cv2.CASCADE_SCALE_IMAGE)
     fasec_img = []
@@ -40,7 +40,7 @@ def emotion_on_img(img, md):
         cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
         emotion = " ".join(":".join([k, str(v) + "%"]) for k, v in emotion.items())
         if emotion:
-            cv2.putText(img, emotion, (x, y), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(img, emotion, (x, y), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0), 2, cv2.LINE_AA)
     return img
 
 

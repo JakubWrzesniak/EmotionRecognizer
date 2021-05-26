@@ -8,12 +8,12 @@ def show_img(title, path):
         img = pyglet.sprite.Sprite(image)
     except:
         img = pyglet.text.Label(
-            text="Can load file: " + path,
+            text="Can load file: ",
             font_size=16,
             x=100,
             y=100
         )
-        window = pyglet.window.Window(600, 200, title)
+        window = pyglet.window.Window(400, 200, title)
 
     # on draw event
     @window.event
