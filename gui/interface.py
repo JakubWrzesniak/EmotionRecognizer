@@ -58,7 +58,7 @@ class Main_page(Base_Gui):
 
     def create_additive(self):
         self.frame = tk.Frame(self, bg="blue")
-        self.title = tk.Label(self, text='Welcom in \nAioFer', font=self.controller.title_font)
+        self.title = tk.Label(self, text='Welcom in \nEmotion Recognizer', font=self.controller.title_font)
         self.create_model = tk.Button(self.frame, text="Create new model", font=self.controller.button_font,
                                       command=lambda: self.controller.show_frame('Create_model'))
         self.load_model = tk.Button(self.frame, text="Load model", font=self.controller.button_font,

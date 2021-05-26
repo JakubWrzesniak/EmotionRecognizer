@@ -12,20 +12,6 @@ emotion_colors = {'anger': [255, 0, 0],
 
 face_cascade = cv2.CascadeClassifier('emotion_recognizer/haarcascade_frontalface_default.xml')
 
-def face_recognize(img):
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray,
-                                          scaleFactor=1.05,
-                                          minNeighbors=5,
-                                          minSize=(48, 48),
-                                          flags=cv2.CASCADE_SCALE_IMAGE
-                                          )
-    fasec_img = []
-    for i in range(len(faces)):
-        (x, y, w, h) = faces[i]
-        ROI = gray[y:y + h, x:x + w]
-        fasec_img.append(ROI)
-    return len(faces), fasec_img
 
 
 def get_color(emotions):
@@ -39,7 +25,11 @@ def get_color(emotions):
 
 def emotion_on_img(img, md):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+    faces = face_cascade.detectMultiScale(gray,
+                                          scaleFactor=1.05,
+                                          minNeighbors=5,
+                                          minSize=(48, 48),
+                                          flags=cv2.CASCADE_SCALE_IMAGE)
     fasec_img = []
     for i in range(len(faces)):
         (x, y, w, h) = faces[i]
@@ -50,7 +40,7 @@ def emotion_on_img(img, md):
         cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
         emotion = " ".join(":".join([k, str(v) + "%"]) for k, v in emotion.items())
         if emotion:
-            cv2.putText(img, emotion, (x, y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 0), 2, cv2.LINE_AA)
+            cv2.putText(img, emotion, (x, y), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 2, cv2.LINE_AA)
     return img
 
 
