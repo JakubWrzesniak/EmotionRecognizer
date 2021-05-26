@@ -9,12 +9,12 @@ from gui.add_earling_stopp import Add_earling_stop
 from gui.add_lr_scheduler import Add_lr_scheduler
 from gui.add_trained_datagen import Add_trained_datagen
 
-class BazoweGui(tk.Frame):
+class Base_Gui(tk.Frame):
     def __init__(self, parent, controller):
         self.controller = controller
         tk.Frame.__init__(self, parent)
         self.parent = parent
-        self.geometria_baza = "1200x800+50+50"
+        self.geometria_baza = "1000x600+100+100"
         self.controller.geometry(self.geometria_baza)
         self.controller.protocol("WM_DELETE_WINDOW", self.file_quit)
         self.create_edit_menu()

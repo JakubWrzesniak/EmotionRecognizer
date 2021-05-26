@@ -154,7 +154,7 @@ def cnn_for_raw_img(in_shape):
     return model_in, model_out
 
 
-class emotion_model:
+class Emotion_model:
 
     def __init__(self, model_name, selected_emotions, bach_size, epochs, lr_scheduler, early_stopping, train_datagen):
         self.__batch_size = bach_size
@@ -298,7 +298,7 @@ class emotion_model:
     def normalize_data(X_train, X_valid, X_test):
         return X_train / 255., X_valid / 255., X_test / 255.
 
-    def model_builder(self, in_shape, out_shape):
+    def __model_builder(self, in_shape, out_shape):
         cnn_in, cnn_out = cnn_for_raw_img(in_shape)
         model_out = Dense(out_shape, activation="softmax", name="out_layer")(cnn_out)
         self.__model = Model(inputs=cnn_in, outputs=model_out, name="CNN")
@@ -306,7 +306,7 @@ class emotion_model:
 
     def train(self, X_train, y_train, validation_data):
         if not self.__trained:
-            self.model_builder(X_train.shape[1:], y_train.shape[1])
+            self.__model_builder(X_train.shape[1:], y_train.shape[1])
 
             self.__model.compile(
                 loss="categorical_crossentropy",
@@ -405,7 +405,6 @@ class emotion_model:
             pyplot.show()
 
     def predict(self, img):
-
         img = np.array(cv2.resize(img, (48, 48)), dtype=float)
         img = img.flatten()
         img = img.reshape([1, 48, 48, 1]) / 255.
@@ -423,16 +422,18 @@ def model_list():
 
 def my_models():
     m = model_list()
-    return [emotion_model.load_model(x) for x in m]
+    return [Emotion_model.load_model(x) for x in m]
 
 
 def delete_model(model_name):
-    if os.path.exists(ARCHITECTURE_PATH + model_name + ".png"):
-        os.remove(ARCHITECTURE_PATH + model_name + ".png")
     if os.path.exists(CONFUSION_MATRIX_PATH + model_name + ".png"):
         os.remove(CONFUSION_MATRIX_PATH + model_name + ".png")
     if os.path.exists(EPOCH_HISTORY_PATH + model_name + ".png"):
         os.remove(EPOCH_HISTORY_PATH + model_name + ".png")
+    if os.path.exists(PERFORMANCE_DIST_PATH + model_name + ".png"):
+        os.remove(PERFORMANCE_DIST_PATH + model_name + ".png")
+    if os.remove(VALUES_PATH + model_name + ".pickle"):
+        os.remove(VALUES_PATH + model_name + ".pickle")
     if os.path.exists(MODELS_PATH + model_name + ".h5"):
         os.remove(MODELS_PATH + model_name + ".h5")
         return True

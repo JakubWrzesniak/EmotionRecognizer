@@ -41,6 +41,16 @@ def loading(th):
                                     anchor_y='center')
         return title
 
+    def end():
+        title = pyglet.text.Label(text="The process of creating the model has been completed.\nPlease close this window",
+                                  font_name='Solaris',
+                                  font_size=20,
+                                  x=w / 2,
+                                  y=h / 20,
+                                  anchor_x='center',
+                                  anchor_y='center')
+        return title
+
     @window.event
     def on_draw():
         window.clear()
@@ -53,7 +63,6 @@ def loading(th):
         else:
             th.join()
             window.close()
-            pyglet.app.exit()
 
     th.start()
     pyglet.clock.schedule_interval(func=exit, interval=3.)

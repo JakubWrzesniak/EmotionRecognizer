@@ -1,14 +1,14 @@
 import os
 import cv2
 
-emotion_colors={'anger': [255, 0, 0],
-                'disgust': [0, 255, 0],
-                'fear': [67, 44, 25],
-                'happiness': [255, 255, 0],
-                'sadness': [0, 0, 0],
-                'surprise': [255, 51, 153],
-                'neutral': [255, 255, 255]
-}
+emotion_colors = {'anger': [255, 0, 0],
+                  'disgust': [0, 255, 0],
+                  'fear': [67, 44, 25],
+                  'happiness': [255, 255, 0],
+                  'sadness': [0, 0, 0],
+                  'surprise': [255, 51, 153],
+                  'neutral': [255, 255, 255]
+                  }
 
 face_cascade = cv2.CascadeClassifier('emotion_recognizer/haarcascade_frontalface_default.xml')
 
@@ -33,8 +33,9 @@ def get_color(emotions):
     for k, v in emotions.items():
         em_color = emotion_colors[k]
         for i in range(3):
-            color[i] += em_color[i]*v//100
+            color[i] += em_color[i] * v // 100
     return tuple(color)
+
 
 def emotion_on_img(img, md):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -81,5 +82,3 @@ def run(model):
             pass
     cap.release()
     cv2.destroyAllWindows()
-
-

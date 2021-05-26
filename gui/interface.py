@@ -2,13 +2,13 @@ import tkinter as tk
 from copy import copy
 from tkinter import font as tkfont, END, NSEW, EW, W, NW
 import threading
-from Model.model import emotion_model, my_models, model_list, EPOCH_HISTORY_PATH, CONFUSION_MATRIX_PATH, \
+from Model.model import Emotion_model, my_models, model_list, EPOCH_HISTORY_PATH, CONFUSION_MATRIX_PATH, \
     PERFORMANCE_DIST_PATH, delete_model
 from config.early_stopping import early_stopping
 from config.lr_schedulers import lr_schedulers
 from config.traind_datagen import train_datagen
 from emotion_recognizer import cam_emo_rec
-from gui.gui_template import BazoweGui
+from gui.gui_template import Base_Gui
 from gui.show_img import show_img
 
 emotions = ['anger', 'disgust', 'fear', 'happiness', 'sadness', 'surprise', 'neutral']
@@ -20,8 +20,8 @@ class EmotionRecognizer(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
 
         self.title_font = tkfont.Font(family='Comic', size=36, weight="bold")
-        self.button_font = tkfont.Font(family='Comic', size=24)
-        self.main_font = tkfont.Font(family='Comic', size=14)
+        self.button_font = tkfont.Font(family='Comic', size=16)
+        self.main_font = tkfont.Font(family='Comic', size=12)
         self.geometry_base = "1000x800+50+50"
 
         container = tk.Frame(self)
@@ -53,12 +53,11 @@ class EmotionRecognizer(tk.Tk):
             v.refresh()
 
 
-class Main_page(BazoweGui):
+class Main_page(Base_Gui):
 
     def create_additive(self):
         self.frame = tk.Frame(self, bg="blue")
-        self.controller.geometry("600x400+400+150")
-        self.title = tk.Label(self, text='Welcom in \nAIOWall', font=self.controller.title_font)
+        self.title = tk.Label(self, text='Welcom in \nAioFer', font=self.controller.title_font)
         self.create_model = tk.Button(self.frame, text="Create new model", font=self.controller.button_font,
                                       command=lambda: self.controller.show_frame('Create_model'))
         self.load_model = tk.Button(self.frame, text="Load model", font=self.controller.button_font,
@@ -69,7 +68,7 @@ class Main_page(BazoweGui):
         self.load_model.grid(row=1, column=0, sticky=EW)
 
 
-class Create_model(BazoweGui):
+class Create_model(Base_Gui):
 
     def remove(self, key, collection):
         if key in collection.keys():
@@ -114,7 +113,6 @@ class Create_model(BazoweGui):
         except:
             tk.messagebox.showwarning(title="Warnning", message="Model was not created!")
         self.controller.deiconify()
-
         self.controller.show_frame('Load_model')
 
     def submit(self):
@@ -132,7 +130,7 @@ class Create_model(BazoweGui):
         elif not self.early_stopping_var:
             tk.messagebox.showwarning(title="Warnning", message="Select Early stopping")
         else:
-            new_model = emotion_model.create_model(model_name=self.input_name.get(),
+            new_model = Emotion_model.create_model(model_name=self.input_name.get(),
                                                    selected_emotions=emotions,
                                                    bach_size=self.batch_var.get(),
                                                    epochs=self.epoch_var.get(),
@@ -310,7 +308,7 @@ class Create_model(BazoweGui):
         self.list_lr_scheduler.bind("<<ListboxSelect>>", self.callback_lr)
 
 
-class Load_model(BazoweGui):
+class Load_model(Base_Gui):
 
     def show_epoch(self):
         try:
