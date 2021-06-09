@@ -78,27 +78,27 @@ class Create_model(Base_Gui):
                                          .format(key))
             if res:
                 del collection[key]
-                self.refresh()
+        self.refresh()
 
     def refresh(self):
         nltd = train_datagen
         nlrs = lr_schedulers
         nles = early_stopping
-        if nltd != self.tdl:
-            self.ltd = nltd
-            self.list_train_datagen.delete(0, tk.END)
-            for elem in self.ltd:
-                self.list_train_datagen.insert(END, elem)
-        if nlrs != self.lsl:
-            self.lsl = nlrs
-            self.list_lr_scheduler.delete(0, tk.END)
-            for elem in self.lsl:
-                self.list_lr_scheduler.insert(END, elem)
-        if nles != self.esl:
-            self.esl = nles
-            self.list_early_stopping.delete(0, tk.END)
-            for elem in self.esl:
-                self.list_early_stopping.insert(END, elem)
+
+        self.ltd = nltd
+        self.list_train_datagen.delete(0, tk.END)
+        for elem in self.ltd:
+            self.list_train_datagen.insert(END, elem)
+
+        self.lsl = nlrs
+        self.list_lr_scheduler.delete(0, tk.END)
+        for elem in self.lsl:
+            self.list_lr_scheduler.insert(END, elem)
+
+        self.esl = nles
+        self.list_early_stopping.delete(0, tk.END)
+        for elem in self.esl:
+            self.list_early_stopping.insert(END, elem)
 
     def learn(self, model):
         model.learn()
