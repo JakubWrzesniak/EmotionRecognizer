@@ -251,7 +251,8 @@ class Emotion_model:
         with open(VALUES_PATH + self.__model_name + '.pickle', 'wb') as handle:
             pickle.dump(to_save, handle)
 
-    def load_data(self):
+    @staticmethod
+    def load_data():
         df = pd.read_csv(DATA_PATH)
         return df
 
